@@ -27,34 +27,35 @@ struct TabSpaceApp: App {
                 let calURL = URL(fileURLWithPath: "/System/Applications/Calendar.app")
                 let remindersURL = URL(fileURLWithPath: "/System/Applications/Reminders.app")
                 
-                for runningApp in NSWorkspace.shared.runningApplications {
-                    runningApp.hide()
-                }
+                NSWorkspace.shared.hideOtherApplications()
+
                 workspace.open(notionURL)
                 workspace.open(remnoteURL)
                 workspace.open(arcURL)
                 workspace.open(calURL)
                 workspace.open(remindersURL)
-                
+            
             }
             Button("Coding") {
                 let xcodeURL = URL(fileURLWithPath: "/Applications/Xcode.app")
                 let termUrl = URL(fileURLWithPath: "/System/Applications/Utilities/Terminal.app")
 
-                for runningApp in NSWorkspace.shared.runningApplications {
-                    runningApp.hide()
-                }
+                NSWorkspace.shared.hideOtherApplications()
+
                 workspace.open(xcodeURL)
                 workspace.open(termUrl)
+                   
             }
             Button("Clear") {
-                for runningApp in NSWorkspace.shared.runningApplications {
-                    runningApp.hide()
-                }
+                NSWorkspace.shared.hideOtherApplications()
+            }
+            Divider()
+            Button("Save Space") {
+                
             }
             Divider()
             Button("Prefrences...") {
-                
+           
             }
         }
     }
