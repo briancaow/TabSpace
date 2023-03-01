@@ -27,7 +27,7 @@ struct TabSpaceApp: App {
                 let calURL = URL(fileURLWithPath: "/System/Applications/Calendar.app")
                 let remindersURL = URL(fileURLWithPath: "/System/Applications/Reminders.app")
                 
-                NSWorkspace.shared.hideOtherApplications()
+                workspace.hideOtherApplications()
 
                 workspace.open(notionURL)
                 workspace.open(remnoteURL)
@@ -40,17 +40,45 @@ struct TabSpaceApp: App {
                 let xcodeURL = URL(fileURLWithPath: "/Applications/Xcode.app")
                 let termUrl = URL(fileURLWithPath: "/System/Applications/Utilities/Terminal.app")
 
-                NSWorkspace.shared.hideOtherApplications()
+                workspace.hideOtherApplications()
 
                 workspace.open(xcodeURL)
                 workspace.open(termUrl)
                    
             }
             Button("Clear") {
-                NSWorkspace.shared.hideOtherApplications()
+                workspace.hideOtherApplications()
             }
             Divider()
             Button("Save Space") {
+                
+                // Get all open windows
+                let options = CGWindowListOption(arrayLiteral: .excludeDesktopElements, .optionOnScreenOnly)
+                let windowsListInfo = CGWindowListCopyWindowInfo(options, CGWindowID(0))
+                let infoList = windowsListInfo as! [[String:Any]]
+                let visibleWindows = infoList.filter{ $0["kCGWindowLayer"] as! Int == 0 }
+
+                // Get all applications in space
+                var applicationsInSpace: Set<String> = [];
+                for window in visibleWindows {
+                    print(window["kCGWindowOwnerName"]!)
+                    applicationsInSpace.insert(window["kCGWindowOwnerName"]! as! String)
+                }
+
+                // Get URL of all applications in space
+                var applicationURLs: Set<String> = [];
+                for app in workspace.runningApplications {
+                    if (applicationsInSpace.contains(app.localizedName ?? "")) {
+                        applicationURLs.insert(app.bundleURL!.relativePath)
+                        //print(app.bundleURL?.relativePath ?? "no path")
+                    }
+                    
+                }
+                
+                for urlPath in applicationURLs {
+                    print(urlPath)
+                }
+                
                 
             }
             Divider()
