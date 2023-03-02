@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct MenuBarView: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(sortDescriptors: [])
@@ -25,9 +26,9 @@ struct MenuBarView: View {
             Divider()
             
             Button("Save Space") {
-                
-                
-                
+                workspace.openApplication(at:
+                    URL(fileURLWithPath: "/Users/briancao/Library/Developer/Xcode/DerivedData/TabSpace-artbskfyyhbgtdboioabhbhcfhmk/Build/Products/Debug/TabSpace.app"),
+                    configuration: NSWorkspace.OpenConfiguration())
             }
             
             Divider()

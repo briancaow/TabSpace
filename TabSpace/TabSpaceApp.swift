@@ -15,10 +15,16 @@ struct TabSpaceApp: App {
     var persistenceController = PersistenceController.shared
     
     var body: some Scene {
+        
         WindowGroup {
             ContentView()
+                .frame(width: 220, height: 100)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                
+                
         }
+        .windowResizability(.contentSize)
+        
         MenuBarExtra("TabSpace", systemImage: "wand.and.stars") {
             MenuBarView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)

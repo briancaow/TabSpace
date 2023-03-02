@@ -59,5 +59,7 @@ struct ContentView: View {
             }
             .disabled(spaceName == "")
         }
+        
     }
+    
 }
