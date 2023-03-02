@@ -2,7 +2,7 @@
 //  Tab+CoreDataProperties.swift
 //  TabSpace
 //
-//  Created by Brian Cao on 3/1/23.
+//  Created by Brian Cao on 3/2/23.
 //
 //
 
@@ -17,10 +17,10 @@ extension Tab {
     }
 
     @NSManaged public var urlPath: String?
-    @NSManaged public var xPosition: Double
-    @NSManaged public var yPosition: Double
-    @NSManaged public var width: Double
-    @NSManaged public var height: Double
+    @NSManaged public var xPosition: Int16
+    @NSManaged public var yPosition: Int16
+    @NSManaged public var width: Int16
+    @NSManaged public var height: Int16
     @NSManaged public var name: String?
     @NSManaged public var space: Space?
 

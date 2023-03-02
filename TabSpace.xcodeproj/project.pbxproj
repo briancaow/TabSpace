@@ -14,10 +14,10 @@
 		A7F5E7AE29AF2E1D003F4634 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5E7AD29AF2E1D003F4634 /* Persistence.swift */; };
 		A7F5E7CD29AFFCD8003F4634 /* Space+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5E7C929AFFCD8003F4634 /* Space+CoreDataClass.swift */; };
 		A7F5E7CE29AFFCD8003F4634 /* Space+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5E7CA29AFFCD8003F4634 /* Space+CoreDataProperties.swift */; };
-		A7F5E7CF29AFFCD8003F4634 /* Tab+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5E7CB29AFFCD8003F4634 /* Tab+CoreDataClass.swift */; };
-		A7F5E7D029AFFCD8003F4634 /* Tab+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5E7CC29AFFCD8003F4634 /* Tab+CoreDataProperties.swift */; };
 		A7F5E7F229B0174B003F4634 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5E7F129B0174B003F4634 /* ContentView.swift */; };
 		A7F5E7F429B01B73003F4634 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5E7F329B01B73003F4634 /* MenuBar.swift */; };
+		A7F5E7F729B09282003F4634 /* Tab+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5E7F529B09282003F4634 /* Tab+CoreDataClass.swift */; };
+		A7F5E7F829B09282003F4634 /* Tab+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5E7F629B09282003F4634 /* Tab+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,10 +30,10 @@
 		A7F5E7AD29AF2E1D003F4634 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		A7F5E7C929AFFCD8003F4634 /* Space+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Space+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A7F5E7CA29AFFCD8003F4634 /* Space+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Space+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A7F5E7CB29AFFCD8003F4634 /* Tab+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tab+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A7F5E7CC29AFFCD8003F4634 /* Tab+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tab+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A7F5E7F129B0174B003F4634 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A7F5E7F329B01B73003F4634 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		A7F5E7F529B09282003F4634 /* Tab+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tab+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A7F5E7F629B09282003F4634 /* Tab+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tab+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +92,8 @@
 			children = (
 				A7F5E7C929AFFCD8003F4634 /* Space+CoreDataClass.swift */,
 				A7F5E7CA29AFFCD8003F4634 /* Space+CoreDataProperties.swift */,
-				A7F5E7CB29AFFCD8003F4634 /* Tab+CoreDataClass.swift */,
-				A7F5E7CC29AFFCD8003F4634 /* Tab+CoreDataProperties.swift */,
+				A7F5E7F529B09282003F4634 /* Tab+CoreDataClass.swift */,
+				A7F5E7F629B09282003F4634 /* Tab+CoreDataProperties.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -169,12 +169,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7F5E7CD29AFFCD8003F4634 /* Space+CoreDataClass.swift in Sources */,
-				A7F5E7CF29AFFCD8003F4634 /* Tab+CoreDataClass.swift in Sources */,
 				A7F5E7F229B0174B003F4634 /* ContentView.swift in Sources */,
 				A7F5E7CE29AFFCD8003F4634 /* Space+CoreDataProperties.swift in Sources */,
 				A7BC79CE29AADBE100B3E69B /* TabSpaceApp.swift in Sources */,
+				A7F5E7F829B09282003F4634 /* Tab+CoreDataProperties.swift in Sources */,
 				A7F5E7F429B01B73003F4634 /* MenuBar.swift in Sources */,
-				A7F5E7D029AFFCD8003F4634 /* Tab+CoreDataProperties.swift in Sources */,
+				A7F5E7F729B09282003F4634 /* Tab+CoreDataClass.swift in Sources */,
 				A7F5E7AC29AEFC88003F4634 /* Model.xcdatamodeld in Sources */,
 				A7F5E7AE29AF2E1D003F4634 /* Persistence.swift in Sources */,
 			);

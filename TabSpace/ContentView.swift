@@ -25,9 +25,9 @@ struct ContentView: View {
                 .frame(maxWidth: 200)
             Button("Save Space"){
                 // Init data
-//                let space = Space()
-//                space.name = spaceName
-//                var tabs: Set<Tab>
+                let space = Space()
+                space.name = spaceName
+                var tabs: Set<Tab> = Set()
                 
                 
                 // Get all open windows
@@ -46,15 +46,27 @@ struct ContentView: View {
                         for app in workspace.runningApplications {
                             if (appName == app.localizedName ?? "") {
                                 // Got apps with open windows and URL
-//                                var tab = Tab()
-//                                tab.name = appName
-//                                tab.urlPath = app.bundleURL!.relativePath
-//                                tab.xPosition = window.
+                                var tab = Tab()
+                                tab.name = appName
+                                tab.urlPath = app.bundleURL!.relativePath
+
                                 print(appName)
                                 print(app.bundleURL!.relativePath)
-                                print(window)
-                                //print(app)
-                            
+                                let str: Dictionary = window["kCGWindowBounds"]! as! Dictionary<String, Int>
+                                
+                                let height: Int = str["Height"]!
+                                let width: Int = str["Width"]!
+                                let x: Int = str["X"]!
+                                let y: Int = str["Y"]!
+                                
+                                tab.xPosition = Int16(x)
+                                tab.yPosition = Int16(y)
+                                tab.height = Int16(height)
+                                tab.width = Int16(width)
+                                
+                                print(str)
+                                tabs.insert(tab)
+                                
                                 
                             }
                             
@@ -64,6 +76,7 @@ struct ContentView: View {
                     
                 }
                 
+                try! self.viewContext.save()
                 
                 
                 
