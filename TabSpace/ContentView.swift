@@ -29,6 +29,7 @@ struct ContentView: View {
                     let tabs: Set = space.tabs as! Set<Tab>
                     for tab in tabs {
                         print("  " + tab.name!)
+                        print("    URLPath:\(tab.urlPath!)")
                         print("    x:\(tab.xPosition)")
                         print("    y:\(tab.yPosition)")
                         print("    width:\(tab.width)")
