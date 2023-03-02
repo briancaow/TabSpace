@@ -20,6 +20,11 @@ struct MenuBarView: View {
     
     var body: some View {
         VStack{
+            List(spaces) { space in
+                Button(space.name ?? "Unknown") {
+                    print(space.tabs?.count ?? "default value")
+                }
+            }
             Button("Clear") {
                 workspace.hideOtherApplications()
             }
@@ -39,6 +44,7 @@ struct MenuBarView: View {
                 NSApplication.shared.terminate(nil)
             }.keyboardShortcut("q")
         }
+        
         
     }
 }

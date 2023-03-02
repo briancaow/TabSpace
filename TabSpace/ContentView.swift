@@ -21,13 +21,29 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
+            List(spaces) { space in
+                Button(space.name ?? "Unknown") {
+                    print("Space: ")
+                    print("  " + space.name!)
+                    print("Tabs:")
+                    let tabs: Set = space.tabs as! Set<Tab>
+                    for tab in tabs {
+                        print("  " + tab.name!)
+                        print("    x:\(tab.xPosition)")
+                        print("    y:\(tab.yPosition)")
+                        print("    width:\(tab.width)")
+                        print("    height:\(tab.width)")
+                    }
+                    print("")
+                }
+            }
             TextField("New Space Name", text: $spaceName)
                 .frame(maxWidth: 200)
             Button("Save Space"){
                 // Init data
-                let space = Space()
+                let space = Space(context: self.viewContext)
                 space.name = spaceName
-                var tabs: Set<Tab> = Set()
+                
                 
                 
                 // Get all open windows
@@ -46,7 +62,7 @@ struct ContentView: View {
                         for app in workspace.runningApplications {
                             if (appName == app.localizedName ?? "") {
                                 // Got apps with open windows and URL
-                                var tab = Tab()
+                                let tab = Tab(context: self.viewContext)
                                 tab.name = appName
                                 tab.urlPath = app.bundleURL!.relativePath
 
@@ -65,8 +81,7 @@ struct ContentView: View {
                                 tab.width = Int16(width)
                                 
                                 print(str)
-                                tabs.insert(tab)
-                                
+                                space.addToTabs(tab)
                                 
                             }
                             
@@ -83,6 +98,7 @@ struct ContentView: View {
             }
             .disabled(spaceName == "")
         }
+        .padding()
         
     }
     
