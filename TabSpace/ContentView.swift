@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreData
+import AppKit
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -23,6 +24,12 @@ struct ContentView: View {
             TextField("New Space Name", text: $spaceName)
                 .frame(maxWidth: 200)
             Button("Save Space"){
+                // Init data
+//                let space = Space()
+//                space.name = spaceName
+//                var tabs: Set<Tab>
+                
+                
                 // Get all open windows
                 let options = CGWindowListOption(arrayLiteral: .excludeDesktopElements, .optionOnScreenOnly)
                 let windowsListInfo = CGWindowListCopyWindowInfo(options, CGWindowID(0))
@@ -32,28 +39,32 @@ struct ContentView: View {
                 // Get all applications in space
                 var applicationsInSpace: Set<String> = [];
                 for window in visibleWindows {
-                    applicationsInSpace.insert(window["kCGWindowOwnerName"]! as! String)
-                }
-                
-                // Get URL of all applications in space
-                var applicationURLs: Set<String> = [];
-                for app in workspace.runningApplications {
-                    if (applicationsInSpace.contains(app.localizedName ?? "")) {
-                        applicationURLs.insert(app.bundleURL!.relativePath)
+                    let appName: String = window["kCGWindowOwnerName"]! as! String
+                    if (!applicationsInSpace.contains(appName)) {
+                        applicationsInSpace.insert(appName)
+                        
+                        for app in workspace.runningApplications {
+                            if (appName == app.localizedName ?? "") {
+                                // Got apps with open windows and URL
+//                                var tab = Tab()
+//                                tab.name = appName
+//                                tab.urlPath = app.bundleURL!.relativePath
+//                                tab.xPosition = window.
+                                print(appName)
+                                print(app.bundleURL!.relativePath)
+                                print(window)
+                                //print(app)
+                            
+                                
+                            }
+                            
+                        }
+                        
                     }
                     
                 }
                 
                 
-                // Print all apps
-                for app in applicationsInSpace {
-                    print(app)
-                }
-                
-                // Print all URL paths
-                for urlPath in applicationURLs {
-                    print(urlPath)
-                }
                 
                 
             }
