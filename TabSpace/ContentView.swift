@@ -61,7 +61,7 @@ struct ContentView: View {
                         applicationsInSpace.insert(appName)
                         
                         for app in workspace.runningApplications {
-                            if (appName == app.localizedName ?? "") {
+                            if (appName == app.localizedName ?? "" && appName != "TabSpace") {
                                 // Got apps with open windows and URL
                                 let tab = Tab(context: self.viewContext)
                                 tab.name = appName
