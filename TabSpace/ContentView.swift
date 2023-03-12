@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import CoreData
 import AppKit
+import KeyboardShortcuts
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -34,6 +35,10 @@ struct ContentView: View {
                     HStack {
                         Text(space.name ?? "Unknown")
                         Spacer()
+                       
+                        
+                        
+                        // Trash button
                         Button() {
                             viewContext.delete(space)
                             try! viewContext.save()
@@ -133,4 +138,8 @@ struct ContentView: View {
         
     }
     
+}
+
+extension KeyboardShortcuts.Name {
+    static var shortcuts: Dictionary<String, KeyboardShortcuts.Name> = [:]
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A745E9C229BDA94E0067572B /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = A745E9C129BDA94E0067572B /* KeyboardShortcuts */; };
 		A7BC79CE29AADBE100B3E69B /* TabSpaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BC79CD29AADBE100B3E69B /* TabSpaceApp.swift */; };
 		A7BC79D229AADBE200B3E69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7BC79D129AADBE200B3E69B /* Assets.xcassets */; };
 		A7BC79D529AADBE200B3E69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7BC79D429AADBE200B3E69B /* Preview Assets.xcassets */; };
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A745E9C229BDA94E0067572B /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +104,9 @@
 			dependencies = (
 			);
 			name = TabSpace;
+			packageProductDependencies = (
+				A745E9C129BDA94E0067572B /* KeyboardShortcuts */,
+			);
 			productName = TabSpace;
 			productReference = A7BC79CA29AADBE100B3E69B /* TabSpace.app */;
 			productType = "com.apple.product-type.application";
@@ -130,6 +135,9 @@
 				Base,
 			);
 			mainGroup = A7BC79C129AADBE100B3E69B;
+			packageReferences = (
+				A745E9C029BDA94E0067572B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+			);
 			productRefGroup = A7BC79CB29AADBE100B3E69B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -357,6 +365,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A745E9C029BDA94E0067572B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A745E9C129BDA94E0067572B /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A745E9C029BDA94E0067572B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		A7F5E7AA29AEFC88003F4634 /* Model.xcdatamodeld */ = {

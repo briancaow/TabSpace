@@ -34,7 +34,6 @@ struct MenuBarView: View {
                         workspace.open(URL(fileURLWithPath: tab.urlPath!))
                             
                     }
-                    
                 }
                     
             }
@@ -46,10 +45,14 @@ struct MenuBarView: View {
             Divider()
             
             Button("Edit Spaces") {
-                // need to fix this
-                workspace.openApplication(at:
-                    URL(fileURLWithPath: "/Users/briancao/Library/Developer/Xcode/DerivedData/TabSpace-artbskfyyhbgtdboioabhbhcfhmk/Build/Products/Debug/TabSpace.app"),
-                    configuration: NSWorkspace.OpenConfiguration())
+                let contentView = ContentView().environment(\.managedObjectContext, TabSpaceApp.persistenceController.container.viewContext)
+                let view = NSHostingView(rootView: contentView)
+                let viewController = NSViewController()
+                viewController.view = view
+                let newWindow = NSWindow(contentViewController: viewController)
+            
+                newWindow.makeKeyAndOrderFront(nil)
+                
             }
             
             Divider()
