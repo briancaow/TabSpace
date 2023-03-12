@@ -40,49 +40,50 @@ struct ContentView: View {
             }
             TextField("New Space Name", text: $spaceName)
                 .frame(maxWidth: 200)
-            Button("Save Space"){
-                // Init data
-                let space = Space(context: self.viewContext)
-                space.name = spaceName
-                
-                
-                
-                // Get all open windows
-                let options = CGWindowListOption(arrayLiteral: .excludeDesktopElements, .optionOnScreenOnly)
-                let windowsListInfo = CGWindowListCopyWindowInfo(options, CGWindowID(0))
-                let infoList = windowsListInfo as! [[String:Any]]
-                let visibleWindows = infoList.filter{ $0["kCGWindowLayer"] as! Int == 0 }
-                
-                // Get all applications in space
-                var applicationsInSpace: Set<String> = [];
-                for window in visibleWindows {
-                    let appName: String = window["kCGWindowOwnerName"]! as! String
-                    if (!applicationsInSpace.contains(appName)) {
-                        applicationsInSpace.insert(appName)
-                        
-                        for app in workspace.runningApplications {
-                            if (appName == app.localizedName ?? "" && appName != "TabSpace") {
-                                // Got apps with open windows and URL
-                                let tab = Tab(context: self.viewContext)
-                                tab.name = appName
-                                tab.urlPath = app.bundleURL!.relativePath
+            HStack {
+                Button("Save Space"){
+                    // Init data
+                    let space = Space(context: self.viewContext)
+                    space.name = spaceName
+                    
+                    // Get all open windows
+                    let options = CGWindowListOption(arrayLiteral: .excludeDesktopElements, .optionOnScreenOnly)
+                    let windowsListInfo = CGWindowListCopyWindowInfo(options, CGWindowID(0))
+                    let infoList = windowsListInfo as! [[String:Any]]
+                    let visibleWindows = infoList.filter{ $0["kCGWindowLayer"] as! Int == 0 }
+                    
+                    // Get all applications in space
+                    var applicationsInSpace: Set<String> = [];
+                    for window in visibleWindows {
+                        let appName: String = window["kCGWindowOwnerName"]! as! String
+                        if (!applicationsInSpace.contains(appName)) {
+                            applicationsInSpace.insert(appName)
+                            
+                            for app in workspace.runningApplications {
+                                if (appName == app.localizedName ?? "" && appName != "TabSpace") {
+                                    // Got apps with open windows and URL
+                                    let tab = Tab(context: self.viewContext)
+                                    tab.name = appName
+                                    tab.urlPath = app.bundleURL!.relativePath
 
-                                print(appName)
-                                print(app.bundleURL!.relativePath)
-                                let str: Dictionary = window["kCGWindowBounds"]! as! Dictionary<String, Int>
-                                
-                                let height: Int = str["Height"]!
-                                let width: Int = str["Width"]!
-                                let x: Int = str["X"]!
-                                let y: Int = str["Y"]!
-                                
-                                tab.xPosition = Int16(x)
-                                tab.yPosition = Int16(y)
-                                tab.height = Int16(height)
-                                tab.width = Int16(width)
-                                
-                                print(str)
-                                space.addToTabs(tab)
+                                    print(appName)
+                                    print(app.bundleURL!.relativePath)
+                                    let str: Dictionary = window["kCGWindowBounds"]! as! Dictionary<String, Int>
+                                    
+                                    let height: Int = str["Height"]!
+                                    let width: Int = str["Width"]!
+                                    let x: Int = str["X"]!
+                                    let y: Int = str["Y"]!
+                                    
+                                    tab.xPosition = Int16(x)
+                                    tab.yPosition = Int16(y)
+                                    tab.height = Int16(height)
+                                    tab.width = Int16(width)
+                                    
+                                    print(str)
+                                    space.addToTabs(tab)
+                                    
+                                }
                                 
                             }
                             
@@ -90,14 +91,26 @@ struct ContentView: View {
                         
                     }
                     
+                    try! self.viewContext.save()
+                    
+                    
+                    
                 }
+                .disabled(spaceName == "")
                 
-                try! self.viewContext.save()
-                
-                
-                
+                Button("Delete All Spaces"){
+                    for space in spaces {
+                        viewContext.delete(space)
+                    }
+                    
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        print(error)
+                    }
+                }
             }
-            .disabled(spaceName == "")
+            
         }
         .padding()
         
