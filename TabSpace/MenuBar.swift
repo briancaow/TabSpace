@@ -21,6 +21,7 @@ struct MenuBarView: View {
     var body: some View {
         VStack{
             ForEach(spaces, id: \.self) { space in
+                
                 Button("\(space.name!)") {
 
                     // Hide all other tabs
@@ -33,7 +34,9 @@ struct MenuBarView: View {
                         workspace.open(URL(fileURLWithPath: tab.urlPath!))
                             
                     }
+                    
                 }
+                    
             }
             
             Button("Clear Desktop") {
@@ -43,6 +46,7 @@ struct MenuBarView: View {
             Divider()
             
             Button("Edit Spaces") {
+                // need to fix this
                 workspace.openApplication(at:
                     URL(fileURLWithPath: "/Users/briancao/Library/Developer/Xcode/DerivedData/TabSpace-artbskfyyhbgtdboioabhbhcfhmk/Build/Products/Debug/TabSpace.app"),
                     configuration: NSWorkspace.OpenConfiguration())
@@ -50,10 +54,11 @@ struct MenuBarView: View {
             
             Divider()
             
-            
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }.keyboardShortcut("q")
+            
+
         }
         
         

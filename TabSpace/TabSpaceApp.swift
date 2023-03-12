@@ -19,6 +19,7 @@ struct TabSpaceApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .frame(width: 500, height: 250)
         }
         .windowResizability(.contentSize)
         
