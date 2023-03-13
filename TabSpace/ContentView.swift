@@ -21,13 +21,6 @@ struct ContentView: View {
     
     private let workspace = NSWorkspace.shared
     
-//    init () {
-//        for space in spaces {
-//            KeyboardShortcuts.Name.spaces[space.name!] = KeyboardShortcuts.Name(space.name!)
-//        }
-//
-//    }
-    
     var body: some View {
         
         HStack {
@@ -92,9 +85,14 @@ struct ContentView: View {
                             let tabs: Set<Tab> = space.tabs as! Set<Tab>
                             for tab in tabs {
             
-                                workspace.open(URL(fileURLWithPath: tab.urlPath!))
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    // Code to be executed after a 2 second delay
+                                    workspace.open(URL(fileURLWithPath: tab.urlPath!))
+                                }
             
                             }
+                            
+                            //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
             
                         }
                         

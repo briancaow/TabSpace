@@ -27,20 +27,29 @@ struct MenuBarView: View {
 
                     // Hide all other tabs
                     workspace.hideOtherApplications()
+                    workspace.hideOtherApplications()
+                    workspace.hideOtherApplications()
 
                     // Open tabspace
                     let tabs: Set<Tab> = space.tabs as! Set<Tab>
                     for tab in tabs {
-
-                        workspace.open(URL(fileURLWithPath: tab.urlPath!))
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            // Code to be executed after a 2 second delay
+                            workspace.open(URL(fileURLWithPath: tab.urlPath!))
+                        }
+                        
                             
                     }
+                    
+                    //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
                 }
                     
             }
             
             Button("Clear Desktop") {
                 workspace.hideOtherApplications()
+                //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
             }
             
             Divider()

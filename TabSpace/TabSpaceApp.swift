@@ -52,6 +52,7 @@ final class AppState: ObservableObject {
 
         KeyboardShortcuts.onKeyUp(for: .clearDesktop) { [self] in
             workspace.hideOtherApplications()
+            //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
         }
 
     }
