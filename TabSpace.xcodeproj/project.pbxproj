@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A745E9C229BDA94E0067572B /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = A745E9C129BDA94E0067572B /* KeyboardShortcuts */; };
+		A745E9C429BEAEC60067572B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A745E9C329BEAEC60067572B /* Constants.swift */; };
 		A7BC79CE29AADBE100B3E69B /* TabSpaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BC79CD29AADBE100B3E69B /* TabSpaceApp.swift */; };
 		A7BC79D229AADBE200B3E69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7BC79D129AADBE200B3E69B /* Assets.xcassets */; };
 		A7BC79D529AADBE200B3E69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7BC79D429AADBE200B3E69B /* Preview Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A745E9C329BEAEC60067572B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A7BC79CA29AADBE100B3E69B /* TabSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BC79CD29AADBE100B3E69B /* TabSpaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSpaceApp.swift; sourceTree = "<group>"; };
 		A7BC79D129AADBE200B3E69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				A7BC79CD29AADBE100B3E69B /* TabSpaceApp.swift */,
 				A7F5E7F329B01B73003F4634 /* MenuBar.swift */,
 				A7F5E7F129B0174B003F4634 /* ContentView.swift */,
+				A745E9C329BEAEC60067572B /* Constants.swift */,
 				A7F5E7AD29AF2E1D003F4634 /* Persistence.swift */,
 				A7F5E7AA29AEFC88003F4634 /* Model.xcdatamodeld */,
 				A7BC79D129AADBE200B3E69B /* Assets.xcassets */,
@@ -169,6 +172,7 @@
 				A7F5E7F429B01B73003F4634 /* MenuBar.swift in Sources */,
 				A7F5E7AC29AEFC88003F4634 /* Model.xcdatamodeld in Sources */,
 				A7F5E7AE29AF2E1D003F4634 /* Persistence.swift in Sources */,
+				A745E9C429BEAEC60067572B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

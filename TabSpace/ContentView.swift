@@ -21,6 +21,13 @@ struct ContentView: View {
     
     private let workspace = NSWorkspace.shared
     
+//    init () {
+//        for space in spaces {
+//            KeyboardShortcuts.Name.spaces[space.name!] = KeyboardShortcuts.Name(space.name!)
+//        }
+//
+//    }
+    
     var body: some View {
         
         HStack {
@@ -28,14 +35,18 @@ struct ContentView: View {
                 Text("My Spaces 🪄")
                     .bold()
                     .padding(5)
-                    .frame(width: 150)
+                    .frame(width: 300)
                     .background(colorScheme == .light ? .white : .black)
                 
                 List(spaces) { space in
+                    let name = space.name!
                     HStack {
-                        Text(space.name ?? "Unknown")
+                        Text(name)
+                        
+                        // Keyboard Shortcut recorder
+                        KeyboardShortcuts.Recorder("", name: KeyboardShortcuts.Name.spaces[name]!)
+                        
                         Spacer()
-                       
                         // Trash button
                         Button() {
                             viewContext.delete(space)
@@ -46,14 +57,15 @@ struct ContentView: View {
                     }
                     
                 }
-                .frame(width: 150)
+                .frame(width: 300)
                 .scrollIndicators(.never)
+                
                 
             }
             
-            
-            
             VStack {
+                    
+                KeyboardShortcuts.Recorder("Clear Desktop Shortcut:", name: .clearDesktop)
                 Spacer()
                 Text("""
                     If you want to add a new Space 🪄
@@ -130,14 +142,8 @@ struct ContentView: View {
         }
         .frame(minHeight: 200)
             
-            
-            
-        
-        
     }
     
 }
 
-extension KeyboardShortcuts.Name {
-    static var shortcuts: Dictionary<String, KeyboardShortcuts.Name> = [:]
-}
+

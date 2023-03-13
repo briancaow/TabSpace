@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+import KeyboardShortcuts
 
 struct MenuBarView: View {
     
@@ -64,7 +64,7 @@ struct MenuBarView: View {
                     NSApplication.shared.activate(ignoringOtherApps: true)
                 }
                 
-            }.keyboardShortcut("e")
+            }
             
             Divider()
             
@@ -74,6 +74,7 @@ struct MenuBarView: View {
             
 
         }
+        
         
         
     }
