@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 struct MenuBarView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -17,6 +18,7 @@ struct MenuBarView: View {
 
     private let workspace = NSWorkspace.shared
    
+    private var editWindow:NSWindow? = nil
     
     var body: some View {
         VStack{
@@ -49,11 +51,12 @@ struct MenuBarView: View {
                 let view = NSHostingView(rootView: contentView)
                 let viewController = NSViewController()
                 viewController.view = view
+                
                 let newWindow = NSWindow(contentViewController: viewController)
-            
+                newWindow.title = "TabSpace"
                 newWindow.makeKeyAndOrderFront(nil)
                 
-            }
+            }.keyboardShortcut("e")
             
             Divider()
             

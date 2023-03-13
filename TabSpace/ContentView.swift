@@ -36,8 +36,6 @@ struct ContentView: View {
                         Text(space.name ?? "Unknown")
                         Spacer()
                        
-                        
-                        
                         // Trash button
                         Button() {
                             viewContext.delete(space)
