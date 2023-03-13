@@ -18,7 +18,6 @@ struct MenuBarView: View {
 
     private let workspace = NSWorkspace.shared
    
-    private var editWindow:NSWindow? = nil
     
     var body: some View {
         VStack{
@@ -52,9 +51,18 @@ struct MenuBarView: View {
                 let viewController = NSViewController()
                 viewController.view = view
                 
-                let newWindow = NSWindow(contentViewController: viewController)
-                newWindow.title = "TabSpace"
-                newWindow.makeKeyAndOrderFront(nil)
+                if let existingWindow = NSApplication.shared.windows.first(where: { $0.title == "TabSpace" }) {
+                    // the window already exists, bring it to the front
+                    existingWindow.contentViewController = viewController
+                    existingWindow.makeKeyAndOrderFront(nil)
+                    NSApplication.shared.activate(ignoringOtherApps: true)
+                } else {
+                    // create a new window
+                    let newWindow = NSWindow(contentViewController: viewController)
+                    newWindow.title = "TabSpace"
+                    newWindow.makeKeyAndOrderFront(nil)
+                    NSApplication.shared.activate(ignoringOtherApps: true)
+                }
                 
             }.keyboardShortcut("e")
             
