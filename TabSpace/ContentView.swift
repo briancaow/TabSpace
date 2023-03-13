@@ -44,7 +44,7 @@ struct ContentView: View {
                         Text(name)
                         
                         // Keyboard Shortcut recorder
-                        KeyboardShortcuts.Recorder("", name: KeyboardShortcuts.Name.spaces[name]!)
+                        KeyboardShortcuts.Recorder("", name: KeyboardShortcuts.Name(name))
                         
                         Spacer()
                         // Trash button
@@ -81,6 +81,22 @@ struct ContentView: View {
                         // Init data
                         let space = Space(context: self.viewContext)
                         space.name = spaceName
+                        
+                        // Keyboard short cut
+                        KeyboardShortcuts.onKeyUp(for: KeyboardShortcuts.Name(space.name!)) { [self] in
+                            // Hide all other tabs
+                            workspace.hideOtherApplications()
+            
+                            // Code to be executed after a 1-second delay
+                            // Open tabspace
+                            let tabs: Set<Tab> = space.tabs as! Set<Tab>
+                            for tab in tabs {
+            
+                                workspace.open(URL(fileURLWithPath: tab.urlPath!))
+            
+                            }
+            
+                        }
                         
                         // Get all open windows
                         let options = CGWindowListOption(arrayLiteral: .excludeDesktopElements, .optionOnScreenOnly)
