@@ -22,12 +22,34 @@ struct TabSpaceApp: App {
     private let workspace = NSWorkspace.shared
     
     init() {
+        // Fetch all the spaces
         let request: NSFetchRequest<Space> = Space.fetchRequest()
-
         let spaces = try! TabSpaceApp.persistenceController.container.viewContext.fetch(request)
+        
+        // Registering a name for each shortcut and at functionality to each shortcut
         for space in spaces {
-            let name = space.name!
-            KeyboardShortcuts.Name.spaces[name] = KeyboardShortcuts.Name(name)
+            let id: UUID = space.id!
+            KeyboardShortcuts.Name.spaces[id.uuidString] = KeyboardShortcuts.Name(id.uuidString)
+            KeyboardShortcuts.onKeyUp(for: KeyboardShortcuts.Name.spaces[id.uuidString]!) { [self] in
+                // Hide all other tabs
+                workspace.hideOtherApplications()
+
+                // Code to be executed after a 1-second delay
+                // Open tabspace
+                let tabs: Set<Tab> = space.tabs as! Set<Tab>
+                
+                for tab in tabs {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
+                    
+                        // Code to be executed after a delay
+                        workspace.open(URL(fileURLWithPath: tab.urlPath!))
+                    }
+
+                }
+                    
+                //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
+
+            }
         }
 
     }

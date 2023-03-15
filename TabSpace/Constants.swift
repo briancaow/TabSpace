@@ -11,3 +11,7 @@ extension KeyboardShortcuts.Name {
     static var spaces: Dictionary<String, KeyboardShortcuts.Name> = [:]
     static var clearDesktop = Self("clearDesktop")
 }
+
+class Constants {
+    static let delay: Double = 0.1
+}

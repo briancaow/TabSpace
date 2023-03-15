@@ -31,19 +31,30 @@ struct ContentView: View {
                     .frame(width: 300)
                     .background(colorScheme == .light ? .white : .black)
                 
+                // List of spaces
                 List(spaces) { space in
                     let name = space.name!
+                    let id: UUID = space.id!
                     HStack {
                         Text(name)
                         
                         // Keyboard Shortcut recorder
-                        KeyboardShortcuts.Recorder("", name: KeyboardShortcuts.Name(name))
+                        KeyboardShortcuts.Recorder("", name: KeyboardShortcuts.Name.spaces[id.uuidString]!)
                         
                         Spacer()
                         // Trash button
                         Button() {
+                            
+                            //KeyboardShortcuts.disable(KeyboardShortcuts.Name.spaces[id.uuidString]!)
+                            KeyboardShortcuts.reset(KeyboardShortcuts.Name.spaces[id.uuidString]!)
+                            // Unregister shortcut name
+                            KeyboardShortcuts.Name.spaces.removeValue(forKey: id.uuidString)
+
+                            // Delete from core data
                             viewContext.delete(space)
                             try! viewContext.save()
+                            
+                            
                         } label: {
                             Image(systemName: "trash")
                         }
@@ -71,30 +82,9 @@ struct ContentView: View {
                 HStack {
                     TextField("My New Space", text: $spaceName)
                     Button("Save Space"){
-                        // Init data
+                        // Init data for space
                         let space = Space(context: self.viewContext)
                         space.name = spaceName
-                        
-                        // Keyboard short cut
-                        KeyboardShortcuts.onKeyUp(for: KeyboardShortcuts.Name(space.name!)) { [self] in
-                            // Hide all other tabs
-                            workspace.hideOtherApplications()
-            
-                            // Code to be executed after a 1-second delay
-                            // Open tabspace
-                            let tabs: Set<Tab> = space.tabs as! Set<Tab>
-                            for tab in tabs {
-            
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    // Code to be executed after a 2 second delay
-                                    workspace.open(URL(fileURLWithPath: tab.urlPath!))
-                                }
-            
-                            }
-                            
-                            //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
-            
-                        }
                         
                         // Get all open windows
                         let options = CGWindowListOption(arrayLiteral: .excludeDesktopElements, .optionOnScreenOnly)
@@ -116,8 +106,8 @@ struct ContentView: View {
                                         tab.name = appName
                                         tab.urlPath = app.bundleURL!.relativePath
 
-                                        print(appName)
-                                        print(app.bundleURL!.relativePath)
+                                        //print(appName)
+                                        //print(app.bundleURL!.relativePath)
                                         let str: Dictionary = window["kCGWindowBounds"]! as! Dictionary<String, Int>
                                         
                                         let height: Int = str["Height"]!
@@ -130,7 +120,7 @@ struct ContentView: View {
                                         tab.height = Int16(height)
                                         tab.width = Int16(width)
                                         
-                                        print(str)
+                                        //print(str)
                                         space.addToTabs(tab)
                                         
                                     }
@@ -141,8 +131,35 @@ struct ContentView: View {
                             
                         }
                         
-                        try! self.viewContext.save()
                         
+                        // Add Keyboard short cut
+                        let id = UUID()
+                        space.id = id
+                        KeyboardShortcuts.Name.spaces[id.uuidString] = KeyboardShortcuts.Name(id.uuidString)
+                        KeyboardShortcuts.onKeyUp(for: KeyboardShortcuts.Name.spaces[id.uuidString]!) { [self] in
+                            // Hide all other tabs
+                            workspace.hideOtherApplications()
+            
+                            // Code to be executed after a 1-second delay
+                            // Open tabspace
+                            let tabs: Set<Tab> = space.tabs as! Set<Tab>
+                            
+                            for tab in tabs {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
+                                
+                                    // Code to be executed after a delay
+                                    workspace.open(URL(fileURLWithPath: tab.urlPath!))
+                                }
+            
+                            }
+                                
+                            //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
+            
+                        }
+                        
+                        // Save to Core Data
+                        try! self.viewContext.save()
+                        spaceName = ""
                         
                         
                     }

@@ -21,24 +21,21 @@ struct MenuBarView: View {
     
     var body: some View {
         VStack{
+            // Buttons for Spaces
             ForEach(spaces, id: \.self) { space in
                 
                 Button("\(space.name!)") {
 
                     // Hide all other tabs
                     workspace.hideOtherApplications()
-                    workspace.hideOtherApplications()
-                    workspace.hideOtherApplications()
 
                     // Open tabspace
                     let tabs: Set<Tab> = space.tabs as! Set<Tab>
                     for tab in tabs {
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            // Code to be executed after a 2 second delay
+                        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
+                            // Code to be executed after a delay
                             workspace.open(URL(fileURLWithPath: tab.urlPath!))
                         }
-                        
                             
                     }
                     
