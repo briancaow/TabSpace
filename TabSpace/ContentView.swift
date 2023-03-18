@@ -58,6 +58,7 @@ struct ContentView: View {
                         } label: {
                             Image(systemName: "trash")
                         }
+                        .padding(2)
                     }
                     
                 }
@@ -68,8 +69,15 @@ struct ContentView: View {
             }
             
             VStack {
-                    
-                KeyboardShortcuts.Recorder("Clear Desktop Shortcut:", name: .clearDesktop)
+                HStack {
+                    KeyboardShortcuts.Recorder("Clear Desktop Shortcut:", name: .clearDesktop)
+                    Button("Clear Desktop") {
+                        workspace.hideOtherApplications()
+                    }
+                }
+                
+                KeyboardShortcuts.Recorder("Edit Spaces Shortcut:", name: .editSpaces)
+                
                 Spacer()
                 Text("""
                     If you want to add a new Space 🪄
@@ -138,19 +146,19 @@ struct ContentView: View {
                         KeyboardShortcuts.Name.spaces[id.uuidString] = KeyboardShortcuts.Name(id.uuidString)
                         KeyboardShortcuts.onKeyUp(for: KeyboardShortcuts.Name.spaces[id.uuidString]!) { [self] in
                             // Hide all other tabs
-                            workspace.hideOtherApplications()
+                            for app in workspace.runningApplications {
+                                app.hide()
+                            }
             
                             // Code to be executed after a 1-second delay
                             // Open tabspace
                             let tabs: Set<Tab> = space.tabs as! Set<Tab>
-                            
-                            for tab in tabs {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
-                                
+                            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
+                                for tab in tabs {
                                     // Code to be executed after a delay
                                     workspace.open(URL(fileURLWithPath: tab.urlPath!))
                                 }
-            
+                                    
                             }
                                 
                             //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
@@ -169,7 +177,7 @@ struct ContentView: View {
                 }
             }
             .padding()
-            .frame(minWidth: 350)
+            .frame(minWidth: 450)
         }
         .frame(minHeight: 200)
             

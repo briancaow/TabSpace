@@ -20,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		A745E9C329BEAEC60067572B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A765ED6C29C639A200D465A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A7BC79CA29AADBE100B3E69B /* TabSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BC79CD29AADBE100B3E69B /* TabSpaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSpaceApp.swift; sourceTree = "<group>"; };
 		A7BC79D129AADBE200B3E69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 		A7BC79CC29AADBE100B3E69B /* TabSpace */ = {
 			isa = PBXGroup;
 			children = (
+				A765ED6C29C639A200D465A1 /* Info.plist */,
 				A7F5E7C829AFFBF3003F4634 /* Model */,
 				A7BC79CD29AADBE100B3E69B /* TabSpaceApp.swift */,
 				A7F5E7F329B01B73003F4634 /* MenuBar.swift */,
@@ -307,13 +309,17 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TabSpace/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QuikSwitch;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.bcao.TabSpace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.bcao.QuikSwitch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -334,13 +340,17 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TabSpace/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QuikSwitch;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.bcao.TabSpace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.bcao.QuikSwitch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

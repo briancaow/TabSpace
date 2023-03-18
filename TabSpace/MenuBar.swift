@@ -19,20 +19,43 @@ struct MenuBarView: View {
     private let workspace = NSWorkspace.shared
    
     
+    public static func editSpaces() {
+        let contentView = ContentView().environment(\.managedObjectContext, TabSpaceApp.persistenceController.container.viewContext)
+        let view = NSHostingView(rootView: contentView)
+        let viewController = NSViewController()
+        viewController.view = view
+        
+        if let existingWindow = NSApplication.shared.windows.first(where: { $0.title == "TabSpace" }) {
+            // the window already exists, bring it to the front
+            existingWindow.contentViewController = viewController
+            existingWindow.makeKeyAndOrderFront(nil)
+            NSApplication.shared.activate(ignoringOtherApps: true)
+        } else {
+            // create a new window
+            let newWindow = NSWindow(contentViewController: viewController)
+            newWindow.title = "TabSpace"
+            newWindow.makeKeyAndOrderFront(nil)
+            NSApplication.shared.activate(ignoringOtherApps: true)
+        }
+    }
+    
     var body: some View {
+        
         VStack{
             // Buttons for Spaces
             ForEach(spaces, id: \.self) { space in
                 
                 Button("\(space.name!)") {
 
-                    // Hide all other tabs
-                    workspace.hideOtherApplications()
+                    for app in workspace.runningApplications {
+                        app.hide()
+                    }
+
 
                     // Open tabspace
                     let tabs: Set<Tab> = space.tabs as! Set<Tab>
-                    for tab in tabs {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
+                        for tab in tabs {
                             // Code to be executed after a delay
                             workspace.open(URL(fileURLWithPath: tab.urlPath!))
                         }
@@ -45,30 +68,16 @@ struct MenuBarView: View {
             }
             
             Button("Clear Desktop") {
-                workspace.hideOtherApplications()
+                for app in workspace.runningApplications {
+                    app.hide()
+                }
                 //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
             }
             
             Divider()
             
             Button("Edit Spaces") {
-                let contentView = ContentView().environment(\.managedObjectContext, TabSpaceApp.persistenceController.container.viewContext)
-                let view = NSHostingView(rootView: contentView)
-                let viewController = NSViewController()
-                viewController.view = view
-                
-                if let existingWindow = NSApplication.shared.windows.first(where: { $0.title == "TabSpace" }) {
-                    // the window already exists, bring it to the front
-                    existingWindow.contentViewController = viewController
-                    existingWindow.makeKeyAndOrderFront(nil)
-                    NSApplication.shared.activate(ignoringOtherApps: true)
-                } else {
-                    // create a new window
-                    let newWindow = NSWindow(contentViewController: viewController)
-                    newWindow.title = "TabSpace"
-                    newWindow.makeKeyAndOrderFront(nil)
-                    NSApplication.shared.activate(ignoringOtherApps: true)
-                }
+                MenuBarView.editSpaces()
                 
             }
             

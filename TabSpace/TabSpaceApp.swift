@@ -32,19 +32,20 @@ struct TabSpaceApp: App {
             KeyboardShortcuts.Name.spaces[id.uuidString] = KeyboardShortcuts.Name(id.uuidString)
             KeyboardShortcuts.onKeyUp(for: KeyboardShortcuts.Name.spaces[id.uuidString]!) { [self] in
                 // Hide all other tabs
-                workspace.hideOtherApplications()
+                for app in workspace.runningApplications {
+                    app.hide()
+                }
 
                 // Code to be executed after a 1-second delay
                 // Open tabspace
                 let tabs: Set<Tab> = space.tabs as! Set<Tab>
                 
-                for tab in tabs {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
-                    
+                DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
+                    for tab in tabs {
                         // Code to be executed after a delay
                         workspace.open(URL(fileURLWithPath: tab.urlPath!))
                     }
-
+                        
                 }
                     
                 //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
@@ -76,6 +77,10 @@ final class AppState: ObservableObject {
             workspace.hideOtherApplications()
             //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
         }
+        KeyboardShortcuts.onKeyUp(for: .editSpaces) { [self] in
+            MenuBarView.editSpaces()
+        }
+        
 
     }
 }
