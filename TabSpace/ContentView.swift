@@ -68,23 +68,30 @@ struct ContentView: View {
                 
             }
             
-            VStack {
+            VStack(alignment: .leading) {
                 HStack {
                     KeyboardShortcuts.Recorder("Clear Desktop Shortcut:", name: .clearDesktop)
                     Button("Clear Desktop") {
-                        workspace.hideOtherApplications()
+                        // Hide old stuff
+                        let finderBundleIdentifier = "com.apple.finder"
+                        NSWorkspace.shared.runningApplications
+                            .filter { $0.bundleIdentifier != finderBundleIdentifier }
+                            .forEach {$0.hide()}
+                        
+                        //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
+                        
                     }
                 }
                 
-                KeyboardShortcuts.Recorder("Edit Spaces Shortcut:", name: .editSpaces)
+                KeyboardShortcuts.Recorder("Edit Spaces Shortcut:    ", name: .editSpaces)
                 
                 Spacer()
                 Text("""
-                    If you want to add a new Space 🪄
-                        > 🚀 Launch the apps you would like to add
-                        > ❌ Close the apps you don't want to add
-                        > 🤔 Pick a name for your new space
-                        > 🪄 Click save
+                If you want to add a new Space 🪄
+                    > 🚀 Launch the apps you would like to add
+                    > ❌ Close the apps you don't want to add
+                    > 🤔 Pick a name for your new space
+                    > 🪄 Click save
                 """)
                 Spacer()
                 HStack {
@@ -145,24 +152,20 @@ struct ContentView: View {
                         space.id = id
                         KeyboardShortcuts.Name.spaces[id.uuidString] = KeyboardShortcuts.Name(id.uuidString)
                         KeyboardShortcuts.onKeyUp(for: KeyboardShortcuts.Name.spaces[id.uuidString]!) { [self] in
-                            // Hide all other tabs
-                            for app in workspace.runningApplications {
-                                app.hide()
-                            }
-            
-                            // Code to be executed after a 1-second delay
-                            // Open tabspace
+                            // Hide old stuff
+                            let finderBundleIdentifier = "com.apple.finder"
+                            NSWorkspace.shared.runningApplications
+                                .filter { $0.bundleIdentifier != finderBundleIdentifier }
+                                .forEach {$0.hide()}
+                            // Open New stuff
                             let tabs: Set<Tab> = space.tabs as! Set<Tab>
-                            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
-                                for tab in tabs {
-                                    // Code to be executed after a delay
-                                    workspace.open(URL(fileURLWithPath: tab.urlPath!))
-                                }
-                                    
+                            
+                            for tab in tabs {
+                                workspace.open(URL(fileURLWithPath: tab.urlPath!))
                             }
-                                
+                                            
                             //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
-            
+                                
                         }
                         
                         // Save to Core Data
@@ -180,6 +183,7 @@ struct ContentView: View {
             .frame(minWidth: 450)
         }
         .frame(minHeight: 200)
+        
             
     }
     

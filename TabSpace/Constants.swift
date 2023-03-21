@@ -14,5 +14,5 @@ extension KeyboardShortcuts.Name {
 }
 
 class Constants {
-    static let delay: Double = 0.1
+    static let delay: Double = 0.00
 }

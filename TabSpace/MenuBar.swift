@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import KeyboardShortcuts
+import AppKit
 
 struct MenuBarView: View {
     
@@ -46,31 +47,31 @@ struct MenuBarView: View {
             ForEach(spaces, id: \.self) { space in
                 
                 Button("\(space.name!)") {
-
-                    for app in workspace.runningApplications {
-                        app.hide()
-                    }
-
-
-                    // Open tabspace
+                    // Hide old stuff
+                    let finderBundleIdentifier = "com.apple.finder"
+                    NSWorkspace.shared.runningApplications
+                        .filter { $0.bundleIdentifier != finderBundleIdentifier }
+                        .forEach {$0.hide()}
+                    // Open New stuff
                     let tabs: Set<Tab> = space.tabs as! Set<Tab>
-                    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
-                        for tab in tabs {
-                            // Code to be executed after a delay
-                            workspace.open(URL(fileURLWithPath: tab.urlPath!))
-                        }
-                            
-                    }
                     
+                    for tab in tabs {
+                        workspace.open(URL(fileURLWithPath: tab.urlPath!))
+                    }
+                                    
                     //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
                 }
                     
             }
             
             Button("Clear Desktop") {
-                for app in workspace.runningApplications {
-                    app.hide()
-                }
+                // Hide old stuff
+                let finderBundleIdentifier = "com.apple.finder"
+
+                NSWorkspace.shared.runningApplications
+                  .filter { $0.bundleIdentifier != finderBundleIdentifier }
+                  .forEach { $0.hide() }
+
                 //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
             }
             

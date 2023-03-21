@@ -9,12 +9,13 @@ import SwiftUI
 import Foundation
 import Cocoa
 import KeyboardShortcuts
+import AppKit
 
 @main
 struct TabSpaceApp: App {
     
     // For recording keyboard shortcuts
-    @StateObject private var appState = AppState()
+    private var appState = AppState()
     
     // Core Data
     static var persistenceController = PersistenceController.shared
@@ -31,23 +32,18 @@ struct TabSpaceApp: App {
             let id: UUID = space.id!
             KeyboardShortcuts.Name.spaces[id.uuidString] = KeyboardShortcuts.Name(id.uuidString)
             KeyboardShortcuts.onKeyUp(for: KeyboardShortcuts.Name.spaces[id.uuidString]!) { [self] in
-                // Hide all other tabs
-                for app in workspace.runningApplications {
-                    app.hide()
-                }
-
-                // Code to be executed after a 1-second delay
-                // Open tabspace
+                // Hide old stuff
+                let finderBundleIdentifier = "com.apple.finder"
+                NSWorkspace.shared.runningApplications
+                    .filter { $0.bundleIdentifier != finderBundleIdentifier }
+                    .forEach {$0.hide()}
+                // Open New stuff
                 let tabs: Set<Tab> = space.tabs as! Set<Tab>
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
-                    for tab in tabs {
-                        // Code to be executed after a delay
-                        workspace.open(URL(fileURLWithPath: tab.urlPath!))
-                    }
-                        
+                for tab in tabs {
+                    workspace.open(URL(fileURLWithPath: tab.urlPath!))
                 }
-                    
+                                
                 //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
 
             }
@@ -66,18 +62,22 @@ struct TabSpaceApp: App {
     
 }
 
-@MainActor
-final class AppState: ObservableObject {
+
+final class AppState {
     
     private let workspace = NSWorkspace.shared
      
     init() {
 
-        KeyboardShortcuts.onKeyUp(for: .clearDesktop) { [self] in
-            workspace.hideOtherApplications()
+        KeyboardShortcuts.onKeyUp(for: .clearDesktop) {
+            // Hide old stuff
+            let finderBundleIdentifier = "com.apple.finder"
+            NSWorkspace.shared.runningApplications
+                .filter { $0.bundleIdentifier != finderBundleIdentifier }
+                .forEach {$0.hide()}
             //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
         }
-        KeyboardShortcuts.onKeyUp(for: .editSpaces) { [self] in
+        KeyboardShortcuts.onKeyUp(for: .editSpaces) {
             MenuBarView.editSpaces()
         }
         
