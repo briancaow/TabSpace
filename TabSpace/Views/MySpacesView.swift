@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import KeyboardShortcuts
 
+
 struct MySpacesView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.colorScheme) var colorScheme
@@ -22,7 +23,7 @@ struct MySpacesView: View {
                 .bold()
                 .padding(5)
                 .frame(width: 300)
-                .background(colorScheme == .light ? .white : .black)
+                .background(colorScheme == .light ? .white : Color(nsColor: NSColor(red: 0.11764706, green: 0.11764706, blue: 0.11764706, alpha: 1)))
             
             // List of spaces
             List(spaces) { space in
@@ -55,11 +56,11 @@ struct MySpacesView: View {
                 }
                 
             }
-            .frame(width: 300)
             .scrollIndicators(.never)
             
             
         }
+        .frame(width: 300)
         
     }
 }

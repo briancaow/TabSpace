@@ -22,6 +22,8 @@ struct ContentView: View {
             
             EditSpaceView()
                 .environment(\.managedObjectContext, TabSpaceApp.persistenceController.container.viewContext)
+                .padding()
+                .frame(width: 450)
             
             
         }
