@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import KeyboardShortcuts
 
-struct MySpaces: View {
+struct MySpacesView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.colorScheme) var colorScheme
     
