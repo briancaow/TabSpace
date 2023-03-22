@@ -47,7 +47,7 @@
 		A7BC79C129AADBE100B3E69B = {
 			isa = PBXGroup;
 			children = (
-				A7BC79CC29AADBE100B3E69B /* QuikSwitch */,
+				A7BC79CC29AADBE100B3E69B /* TabSpace */,
 				A7BC79CB29AADBE100B3E69B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,7 +60,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A7BC79CC29AADBE100B3E69B /* QuikSwitch */ = {
+		A7BC79CC29AADBE100B3E69B /* TabSpace */ = {
 			isa = PBXGroup;
 			children = (
 				A765ED6C29C639A200D465A1 /* Info.plist */,
@@ -75,7 +75,7 @@
 				A7BC79D629AADBE200B3E69B /* TabSpace.entitlements */,
 				A7BC79D329AADBE200B3E69B /* Preview Content */,
 			);
-			path = QuikSwitch;
+			path = TabSpace;
 			sourceTree = "<group>";
 		};
 		A7BC79D329AADBE200B3E69B /* Preview Content */ = {
@@ -320,7 +320,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.bcao.QuikSwitch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcao.QuikSwitch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -353,7 +353,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.bcao.QuikSwitch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcao.QuikSwitch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
