@@ -17,12 +17,14 @@ struct MySpacesView: View {
     @FetchRequest(sortDescriptors: [])
     private var spaces: FetchedResults<Space>
     
+    @State var showAlert = false
+    
     var body: some View {
         VStack(spacing: 0) {
-            Text("My Spaces 🪄")
+            Text("My Workspaces 🪄")
                 .bold()
                 .padding(5)
-                .frame(width: 300)
+                .frame(width: 400)
                 .background(colorScheme == .light ? .white : Color(nsColor: NSColor(red: 0.11764706, green: 0.11764706, blue: 0.11764706, alpha: 1)))
             
             // List of spaces
@@ -36,12 +38,30 @@ struct MySpacesView: View {
                     KeyboardShortcuts.Recorder("", name: KeyboardShortcuts.Name.spaces[id.uuidString]!)
                     
                     Spacer()
+                    
+                    // Update Space Button
+                    Button() {
+                        print("Update to match")
+                        // Unregister shortcut name
+                        KeyboardShortcuts.reset(KeyboardShortcuts.Name.spaces[id.uuidString]!)
+                        KeyboardShortcuts.Name.spaces.removeValue(forKey: id.uuidString)
+
+                        // Delete from core data
+                        viewContext.delete(space)
+                        try! viewContext.save()
+                        
+                        // Save new space
+                        EditSpaceView.saveSpace(spaceName: name, context: viewContext)
+                        
+                        showAlert = true
+                    } label: {
+                        Image(systemName: "arrow.down.square")
+                    }
+                    
                     // Trash button
                     Button() {
-                        
-                        //KeyboardShortcuts.disable(KeyboardShortcuts.Name.spaces[id.uuidString]!)
-                        KeyboardShortcuts.reset(KeyboardShortcuts.Name.spaces[id.uuidString]!)
                         // Unregister shortcut name
+                        KeyboardShortcuts.reset(KeyboardShortcuts.Name.spaces[id.uuidString]!)
                         KeyboardShortcuts.Name.spaces.removeValue(forKey: id.uuidString)
 
                         // Delete from core data
@@ -60,7 +80,10 @@ struct MySpacesView: View {
             
             
         }
-        .frame(width: 300)
+        .frame(width: 400)
+        .alert("Updated Workspace to Match!", isPresented: $showAlert) {
+            //Button("OK", role: .cancel) { }
+        }
         
     }
 }

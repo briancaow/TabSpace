@@ -16,20 +16,14 @@ struct EditSpaceView: View {
     
     @State private var spaceName: String = ""
     
-    private let workspace = NSWorkspace.shared
     
     var body: some View {
         VStack(alignment: .leading) {
             // Clear Desktop
-            HStack {
-                KeyboardShortcuts.Recorder("Clear Desktop Shortcut:", name: .clearDesktop)
-                
-                Button("Clear Desktop") {
-                    MenuBarView.clearDesktop()
-                }
-            }
             
-            KeyboardShortcuts.Recorder("Edit Spaces Shortcut:    ", name: .editSpaces)
+            KeyboardShortcuts.Recorder("Clear Desktop:", name: .clearDesktop)
+            
+            KeyboardShortcuts.Recorder("Edit Spaces:    ", name: .editSpaces)
             
             Spacer()
             
@@ -45,12 +39,19 @@ struct EditSpaceView: View {
             Spacer()
             
             // Save Space Text Field and button
+            Button("Clear Desktop") {
+                MenuBarView.clearDesktop()
+            }
+            
             HStack {
                 TextField("My New Space", text: $spaceName)
                 Button("Save Space"){
-                    saveSpace()
+                    EditSpaceView.saveSpace(spaceName: spaceName, context: viewContext)
+                    spaceName = ""
                 }
                 .disabled(spaceName == "")
+                .buttonStyle(.borderedProminent)
+                .tint(.blue)
                 
                 
             }
@@ -58,9 +59,9 @@ struct EditSpaceView: View {
         
     }
     
-    private func saveSpace() {
+    public static func saveSpace(spaceName: String, context: NSManagedObjectContext) {
         // Init data for space
-        let space = Space(context: self.viewContext)
+        let space = Space(context: context)
         space.name = spaceName
         
         // Get all open windows
@@ -76,10 +77,10 @@ struct EditSpaceView: View {
             if (!applicationsInSpace.contains(appName)) {
                 applicationsInSpace.insert(appName)
                 
-                for app in workspace.runningApplications {
+                for app in NSWorkspace.shared.runningApplications {
                     if (appName == app.localizedName ?? "" && appName != "TabSpace") {
                         // Got apps with open windows and URL
-                        let tab = Tab(context: self.viewContext)
+                        let tab = Tab(context: context)
                         tab.name = appName
                         tab.urlPath = app.bundleURL!.relativePath
 
@@ -118,7 +119,7 @@ struct EditSpaceView: View {
         }
         
         // Save to Core Data
-        try! self.viewContext.save()
-        spaceName = ""
+        try! context.save()
+        
     }
 }

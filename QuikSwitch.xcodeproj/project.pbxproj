@@ -52,11 +52,19 @@
 			isa = PBXGroup;
 			children = (
 				A7F5E7F329B01B73003F4634 /* MenuBarView.swift */,
+				A7ACAAF629CFB77600E45A51 /* Preferences */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A7ACAAF629CFB77600E45A51 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
 				A7F5E7F129B0174B003F4634 /* ContentView.swift */,
 				A748739529CA9DE80009BD5F /* MySpacesView.swift */,
 				A748739729CAA1190009BD5F /* EditSpaceView.swift */,
 			);
-			path = Views;
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 		A7BC79C129AADBE100B3E69B = {
@@ -320,7 +328,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"TabSpace/Preview Content\"";
 				DEVELOPMENT_TEAM = L4C8QAYK3H;
 				ENABLE_HARDENED_RUNTIME = NO;
@@ -335,7 +343,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcao.QuikSwitch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -353,7 +362,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"TabSpace/Preview Content\"";
 				DEVELOPMENT_TEAM = L4C8QAYK3H;
 				ENABLE_HARDENED_RUNTIME = NO;
@@ -368,7 +377,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcao.QuikSwitch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

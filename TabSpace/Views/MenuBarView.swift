@@ -41,18 +41,17 @@ struct MenuBarView: View {
     
     public static func openSpace(space: Space) {
         // Hide old stuff
-        let finderBundleIdentifier = "com.apple.finder"
-        NSWorkspace.shared.runningApplications
-            .filter { $0.bundleIdentifier != finderBundleIdentifier }
-            .forEach {$0.hide()}
+        MenuBarView.clearDesktop()
+        
         // Open New stuff
         let tabs: Set<Tab> = space.tabs as! Set<Tab>
         
         for tab in tabs {
             NSWorkspace.shared.open(URL(fileURLWithPath: tab.urlPath!))
+            
         }
                         
-        //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
+        //NSWorkspace.shared.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
     }
     
     public static func clearDesktop() {
@@ -62,7 +61,7 @@ struct MenuBarView: View {
           .filter { $0.bundleIdentifier != finderBundleIdentifier }
           .forEach { $0.hide() }
 
-        //workspace.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
+        //NSWorkspace.shared.open(URL(fileURLWithPath: "/Applications/KeyCastr.app"))
     }
     
     var body: some View {
